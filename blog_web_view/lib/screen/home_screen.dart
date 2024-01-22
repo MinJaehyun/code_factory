@@ -42,18 +42,28 @@ class _HomeScreenState extends State<HomeScreen> {
           'blog web view',
           style: TextStyle(color: Colors.white),
         ),
-        centerTitle: true,
+        // centerTitle: true,
         actions: [
           IconButton(
               onPressed: () {
                 // 웹뷰 작동
                 // isWebView = false; 를 home 버튼 클리하면 true로 변경하기
-                setState(() {
-                  isWebView = true;
-                });
+                setState(
+                  () {
+                    isWebView = true;
+                  },
+                );
               },
               icon: Icon(Icons.home_filled),
               color: Colors.white),
+          IconButton(onPressed: (){
+            // 뒤로 가려면?
+            controller.goBack();// canGoBack();
+          }, icon: Icon(Icons.arrow_back)),
+          IconButton(onPressed: (){
+            // 앞으로 가려면?
+            controller.goForward();
+          }, icon: Icon(Icons.arrow_forward)),
         ],
       ),
       body: isWebView == true
