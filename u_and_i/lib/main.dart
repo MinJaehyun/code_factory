@@ -11,16 +11,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomeScreen(),
+      home: const HomeScreen(),
       theme: ThemeData(
-        textTheme: TextTheme(
-          // headline1: ,
+        textTheme: const TextTheme(
+          // headline1
           displayLarge: TextStyle(color: Colors.redAccent, fontSize: 30, fontWeight: FontWeight.bold),
-          // headline2: ,
+          // headline2
           displayMedium: TextStyle(color: Colors.redAccent, fontSize: 20, fontWeight: FontWeight.bold),
-          // h3
+          // headline3
           displaySmall: TextStyle(color: Colors.redAccent, fontSize: 20,),
-          // headline4:
+          // headline4
           headlineMedium: TextStyle(color: Colors.redAccent, fontSize: 20,),
         )
       ),
