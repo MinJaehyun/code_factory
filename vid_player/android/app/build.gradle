@@ -49,6 +49,9 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        // error fix: Cannot fit requested classes in a single dex file (# methods: 67133 > 65536)
+        // com.android.builder.dexing.DexArchiveMergerException: Error while merging dex archives:
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -64,4 +67,8 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    // error: multiDexEnabled
+    // implementation 'com.android.support:multidex:1.0.3'
+    // implementation 'androidx.multidex:multidex:2.0.1'
+}
