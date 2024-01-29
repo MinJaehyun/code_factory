@@ -1,21 +1,24 @@
 # vid_player
 
-## 흐름(위젯)
+# result
+![11result.gif](asset%2Fimg%2F11result.gif)
+
+# 흐름(위젯)
 1. HomeScreen 위젯은 두 개의 위젯을 조건에 따라 하나의 화면에 나타낸다
 
-## 개선할 점
+# 개선할 점
 ~~1. video_player 상단 배치되었는데 중단으로 옮기기~~
 
-## 진행 상황
+# 진행 상황
 ~~* 첫화면~~
 ~~1. Column 내 Image 와 Text 나타내기~~
-* 두번째 화면
+~~* 두번째 화면~~
 ~~* 첫번째 화면에서 영상 선택하면, 두번째 화면에서 임시 위젯(추후 영상) 나타내기~~
-* 영상 터치하면 중단에는 Stack() 내 Positioned()로 뒤로 3초가기,재생/일시정지, 앞으로 3초가기를 띄운다
-* 영상 우측 상단 동영상 선택하기 아이콘을 띄운다
-* 영상 하단에는 Slider() 띄운다
+~~* 영상 터치하면 중단에는 Stack() 내 Positioned()로 뒤로 3초가기,재생/일시정지, 앞으로 3초가기를 띄운다~~
+~~* 영상 우측 상단 동영상 선택하기 아이콘을 띄운다~~
+~~* 영상 하단에는 Slider() 띄운다~~
 
-### 배운점: image_picker로 영상 선택하고, 클릭한 영상을 video_player 사용하여 띄우는 과정 
+## 배운점-1: image_picker로 영상 선택하고, 클릭한 영상을 video_player 사용하여 띄우는 과정 
 1. home screen 에서 body: video == null ? renderEmpty() : renderVideo(), 처리하고 Widget renderEmpty() {} 으로 가져오는 방식 배움 
 2. Image 가져올 때, 기기마다 사이즈 다르므로 MediaQuery.of(context).size.width, 처리하여 넓힘
 3. textStyle을 변수에 담아 가져와 사용할 수 있고, textStyle.copyWith() 사용하여 변경하고 사용할 수도 있다.
@@ -27,9 +30,20 @@
    1. late VideoPlayerController _videoController = VideoPlayerController.file(File(widget.video!.path));
    2. VideoPlayerController? _videoController; // 이렇게 사용해라
 9. 특징: private 한 _Logo()는 HomeScreen class 하단에 작성할 수도 있다 (코드 다양성(인자))
-====================================================================================
 
-### 문제점 및 해결:
+
+# 문제점 및 해결 - 2
 1. slider 변경해도 변경값을 UI에 반영하지 못한다? 
 - didUpdate() 메서드로 처리 하는게 아니다!
-- video controller 가 변경될 때마다 setState()를 실행 하도록 만들면 된다..(이 코드 익숙해지기, controller 변경할 때마다 자동으로 처리할 수 있다) 
+- video controller 가 변경될 때마다 setState()를 실행 하도록 만들면 된다..(이 코드 익숙해지기, controller 변경할 때마다 자동으로 처리할 수 있다)
+
+
+# 문제점 및 해결 - 3
+1. 슬라이더 UI 화면에 안 보이게 설정하기
+- 슬라이더 위젯에 if문 설정
+2. 동영상 실행 / 일시정지 누르면 3초 뒤 아이콘들 사라지기
+- 기존 GestureDetector 내 두 번의 setState() 처리하여 직접 탭 클릭 시, 화면에 아이콘 띄우거나 안 보이게 설정하고, 자동으로 탭 3초 뒤에 안 보이도록 설정함 
+- 기존 GestureDetector 처리한 동영상 전체 영역에 Future.delayed 설정
+- 실행 중이거나, 일시 정지 중일 때 3초 뒤 아이콘을 안 보이게 설정
+
+
