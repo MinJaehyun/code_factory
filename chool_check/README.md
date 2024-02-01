@@ -1,16 +1,28 @@
 # chool_check
 
-A new Flutter project.
+## 사전 지식
+1. Flutter Geolocator Plugin 
 
-## Getting Started
+## 사전 준비
+1. 구글 API Key
+2. 네이티브 환경 설정
+3. flutter 프로젝트 초기화
+4. 구글 API Key를 깃허브에 올리지 않기 위한 설정
 
-This project is a starting point for a Flutter application.
+## 레이아웃 구상하기 및 구현하기
+* 한 개의 화면을 나타낼 것이다
+1. appbar: renderAppbar() - 상단(제목, 우측에 현재 위치로 이동 아이콘 버튼) 
+2. body: GoogleMap() - 지도(현재 내 위치, 회사 위치, 회사 위치 주변 원표시)
+3. footer: renderFooter() - 출근하기(회사와 내 위치의 거리 차이가 100m 이내면 출근 버튼 활성화 하기)
 
-A few resources to get you started if this is your first Flutter project:
+## 테스트
+1. 내 위치를 회사 근처로 이동하여 출근하기 기능이 작동 유무 확인하기 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 추후, 구현할 것
+1. 출근 버튼 클릭 시, 내 정보를 저장
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 문제점 및 해결
+1. 구글 지도 초기화 시, 화면 깨짐(?) 현상 발생
+   - 애뮬레이터 용량을 늘리고, wipe data로 데이터 초기화 해도 해결 안됨
+     - ![구글지도깨짐.png](assets%2F%EA%B5%AC%EA%B8%80%EC%A7%80%EB%8F%84%EA%B9%A8%EC%A7%90.png)
+   - 
