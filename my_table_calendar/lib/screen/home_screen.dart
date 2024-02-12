@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_table_calendar/component/main_calendar.dart';
+import 'package:my_table_calendar/component/schedule_bottom_sheet.dart';
+import 'package:my_table_calendar/component/schedule_card.dart';
+import 'package:my_table_calendar/component/today_banner.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -9,8 +12,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  DateTime? selectedDay;
+  DateTime selectedDay = DateTime.now();
   DateTime? focusedDay;
+  DateTime? startTime;
+  DateTime? endTime;
+  String? content;
+  int? todoCount;
 
   @override
   Widget build(BuildContext context) {
@@ -19,63 +26,33 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(centerTitle: true, title: Text('일정 관리 앱')),
         body: Column(
           children: [
-            Expanded(
-              child: MainCalendar(
-                selectedDay: selectedDay ?? DateTime.now(),
-                focusedDay: focusedDay ?? DateTime.now(),
-                onDaySelected: onDaySelected,
-              ),
+            MainCalendar(
+              selectedDay: selectedDay,
+              focusedDay: focusedDay ?? DateTime.now(),
+              onDaySelected: onDaySelected,
             ),
-            Container(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text('선택한 날짜: 2024.02.14'), Text('총 개수: 4')],
-                ),
-              ),
-            ),
-            Expanded(
-              child: ListView(
-                children: [
-                  Card(
-                    child: ListTile(
-                      title: Row(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('시작 시간'),
-                              Text('종료 시간'),
-                            ],
-                          ),
-                          SizedBox(width: 100),
-                          Text('contents')
-                        ],
-                      ),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Row(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('18:00'),
-                              Text('19:00'),
-                            ],
-                          ),
-                          SizedBox(width: 100),
-                          Text('16장 달력 UI 구현하기')
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
+            // 날짜와 개수 내려주기
+            TodayBanner(selectedDay: selectedDay, todoCount: 1),
+
+            // 3개 녀려주기
+            // ScheduleCard(startTime:startTime, endTime:endTime, content: content),
+            ScheduleCard(startTime: 12, endTime: 14, content: 'content'),
           ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            // note: showModalBottomSheet 생성 위치 주의!
+            showModalBottomSheet(
+              context: context,
+              isDismissible: true,
+              builder: (context) {
+                return ScheduleBottomSheet();
+              },
+              // note: sheet 화면에서 키보드 띄우면 화면 가려지는데, isScrollControlled 설정하면 해결됨.
+              isScrollControlled: true,
+            );
+          },
+          child: Icon(Icons.add),
         ),
       ),
     );
