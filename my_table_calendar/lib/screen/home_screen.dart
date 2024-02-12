@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:my_table_calendar/component/main_calendar.dart';
 import 'package:my_table_calendar/component/schedule_bottom_sheet.dart';
 import 'package:my_table_calendar/component/schedule_card.dart';
@@ -33,10 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             // 날짜와 개수 내려주기
             TodayBanner(selectedDay: selectedDay, todoCount: 1),
-
-            // 3개 녀려주기
-            // ScheduleCard(startTime:startTime, endTime:endTime, content: content),
             ScheduleCard(startTime: 12, endTime: 14, content: 'content'),
+            // ScheduleCard(startTime:startTime, endTime:endTime, content: content),
           ],
         ),
         floatingActionButton: FloatingActionButton(
@@ -45,11 +44,11 @@ class _HomeScreenState extends State<HomeScreen> {
             showModalBottomSheet(
               context: context,
               isDismissible: true,
+              // note: sheet 화면에서 키보드 띄우면 화면 가려지는데, isScrollControlled 설정하면 해결됨.
+              isScrollControlled: true,
               builder: (context) {
                 return ScheduleBottomSheet();
               },
-              // note: sheet 화면에서 키보드 띄우면 화면 가려지는데, isScrollControlled 설정하면 해결됨.
-              isScrollControlled: true,
             );
           },
           child: Icon(Icons.add),
